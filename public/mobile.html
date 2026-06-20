@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Neon Slash Controller</title>
+  <!-- Cyberpunk fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/mobile.css">
+  
+  <!-- Socket.IO Client -->
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+  <!-- Screen Wrapper -->
+  <div id="controller-container">
+    
+    <!-- Top HUD status -->
+    <header class="controller-header">
+      <div class="brand">
+        <span class="neon-text">NEON</span><span class="cyber-accent">SLASH</span> <span class="badge">CTRL</span>
+      </div>
+      <div id="conn-status" class="status-indicator disconnected">
+        CONNECTING...
+      </div>
+    </header>
+
+    <!-- Permission Overlay (Shown first on mobile to request sensors) -->
+    <div id="permission-overlay" class="overlay-panel">
+      <div class="panel-content">
+        <div class="sensor-icon">⚡</div>
+        <h2>ACTIVATE MOTION</h2>
+        <p>This game uses your phone's gyroscope and accelerometer to track swings.</p>
+        <button id="request-permission-btn" class="action-btn positive">
+          ALLOW SENSORS
+        </button>
+        <p class="small-hint">Note: If denied, touchpad controls will activate automatically.</p>
+      </div>
+    </div>
+
+    <!-- Main Controller Screen -->
+    <main class="controller-main">
+      
+      <!-- Calibration & Info panel -->
+      <section class="info-section glass-card">
+        <div class="debug-readout">
+          <div class="debug-item">
+            <span>ROLL (X):</span> <span id="val-x">0°</span>
+          </div>
+          <div class="debug-item">
+            <span>PITCH (Y):</span> <span id="val-y">0°</span>
+          </div>
+          <div class="debug-item">
+            <span>SWING V:</span> <span id="val-v">0.0</span>
+          </div>
+        </div>
+        <button id="calibrate-btn" class="action-btn secondary">
+          CALIBRATE CENTER
+        </button>
+      </section>
+
+      <!-- Center Action Button (Hold to Slash / Sword grip) -->
+      <section class="haptic-trigger-section">
+        <button id="trigger-btn" class="sword-grip-btn">
+          <div class="grip-inner">
+            <span class="grip-symbol">✦</span>
+            <span class="grip-label">HOLD & SWING</span>
+          </div>
+          <div class="grip-glow"></div>
+        </button>
+      </section>
+
+      <!-- Fallback Touchpad Area -->
+      <section class="touchpad-section glass-card">
+        <div class="section-title">TOUCHPAD FALLBACK</div>
+        <div id="touchpad" class="touch-area">
+          <div class="touch-cross"></div>
+          <div id="touch-pointer" class="touch-pointer"></div>
+          <div class="touch-hint">DRAG THUMB HERE TO SLASH</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Actions (Restart/Menu) -->
+    <footer class="controller-footer">
+      <button id="restart-btn" class="action-btn alert hidden">
+        RESTART GAME
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Client JavaScript -->
+  <script src="js/controller.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "fruit-slicer-controller",
+  "version": "1.0.0",
+  "description": "Multi-device fruit slicing game with a mobile sword controller using Node.js, Socket.IO, and Phaser.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "phaser",
+    "socket.io",
+    "gyroscope",
+    "mobile-controller",
+    "web-audio"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
